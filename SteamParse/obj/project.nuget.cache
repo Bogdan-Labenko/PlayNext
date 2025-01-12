@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "GxM2uk7Lsv0Vgjq5qjsn9/g1aY8duURQKWPFRVOckROV/9aCuQBl4Fei3jc7NctfrJ7AM4GjofEY/khqjr0SEg==",
+  "dgSpecHash": "7uY0LmdA5cX+T3BAU4d+9wL/T6K0L3yZuWUCDIjsPhpDuwUuThIaHRDlCVERvRQFgdmcDcjSmGvb95gIL9Lu8A==",
   "success": true,
   "projectFilePath": "C:\\Users\\lager\\Projects\\requests\\SteamParse\\SteamParse\\SteamParse.csproj",
   "expectedPackageFiles": [
@@ -41,6 +41,8 @@
     "C:\\Users\\lager\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\lager\\.nuget\\packages\\npgsql\\9.0.2\\npgsql.9.0.2.nupkg.sha512",
     "C:\\Users\\lager\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\9.0.2\\npgsql.entityframeworkcore.postgresql.9.0.2.nupkg.sha512",
+    "C:\\Users\\lager\\.nuget\\packages\\polly\\8.5.0\\polly.8.5.0.nupkg.sha512",
+    "C:\\Users\\lager\\.nuget\\packages\\polly.core\\8.5.0\\polly.core.8.5.0.nupkg.sha512",
     "C:\\Users\\lager\\.nuget\\packages\\system.codedom\\6.0.0\\system.codedom.6.0.0.nupkg.sha512",
     "C:\\Users\\lager\\.nuget\\packages\\system.collections.immutable\\7.0.0\\system.collections.immutable.7.0.0.nupkg.sha512",
     "C:\\Users\\lager\\.nuget\\packages\\system.composition\\7.0.0\\system.composition.7.0.0.nupkg.sha512",
