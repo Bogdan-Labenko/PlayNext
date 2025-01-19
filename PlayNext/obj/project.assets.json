@@ -3414,11 +3414,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lager\\Projects\\requests\\SteamParse\\SteamParse\\SteamParse.csproj",
-      "projectName": "SteamParse",
-      "projectPath": "C:\\Users\\lager\\Projects\\requests\\SteamParse\\SteamParse\\SteamParse.csproj",
+      "projectUniqueName": "C:\\Users\\lager\\Projects\\PlayNext\\PlayNext\\PlayNext.csproj",
+      "projectName": "PlayNext",
+      "projectPath": "C:\\Users\\lager\\Projects\\PlayNext\\PlayNext\\PlayNext.csproj",
       "packagesPath": "C:\\Users\\lager\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lager\\Projects\\requests\\SteamParse\\SteamParse\\obj\\",
+      "outputPath": "C:\\Users\\lager\\Projects\\PlayNext\\PlayNext\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\lager\\AppData\\Roaming\\NuGet\\NuGet.Config",

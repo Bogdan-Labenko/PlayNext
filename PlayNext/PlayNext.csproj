@@ -6,6 +6,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <UserSecretsId>aa8ca243-2a1a-4e67-8b63-2eb2cdc8f7f5</UserSecretsId>
+        <RootNamespace>SteamParse</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

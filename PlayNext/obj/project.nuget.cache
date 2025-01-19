@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7uY0LmdA5cX+T3BAU4d+9wL/T6K0L3yZuWUCDIjsPhpDuwUuThIaHRDlCVERvRQFgdmcDcjSmGvb95gIL9Lu8A==",
+  "dgSpecHash": "nCWHLDhLwahu+9EtV3L/sGI4BS7nwJs07JMUm6apCSdsXw8tUX+EV8UuCosTNH35azXxdB8VkGJkL+hBZyPaHQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\lager\\Projects\\requests\\SteamParse\\SteamParse\\SteamParse.csproj",
+  "projectFilePath": "C:\\Users\\lager\\Projects\\PlayNext\\PlayNext\\PlayNext.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lager\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\lager\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\7.0.0\\microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",

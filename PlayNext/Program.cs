@@ -36,7 +36,7 @@ foreach (var info in gamesInfo)
 {
     if (i > 10)
     {
-        await context.SaveChangesAsync();
+        //await context.SaveChangesAsync();
         i = 0;
     }
     stopWatch.Start();

@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamParse", "SteamParse\SteamParse.csproj", "{A5539E92-6D7A-4D75-A48E-89B7BBB8B16C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayNext", "PlayNext\PlayNext.csproj", "{A5539E92-6D7A-4D75-A48E-89B7BBB8B16C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
