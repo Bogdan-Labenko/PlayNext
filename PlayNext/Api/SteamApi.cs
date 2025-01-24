@@ -2,10 +2,10 @@ using Polly;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Web;
-using SteamParse.DTOs;
-using SteamParse.Models;
+using PlayNextServer.DTOs;
+using PlayNextServer.Models;
 
-namespace SteamParse.Api;
+namespace PlayNextServer.Api;
 
 public class SteamApi(string apiKey)
 {
@@ -20,7 +20,7 @@ public class SteamApi(string apiKey)
 
     public async Task<IList<App>> GetAllApps()
     {
-        var url = Urls.allApps + $"&key={apiKey}";
+        var url = Urls.SteamAllApps + $"&key={apiKey}";
         IList<App> apps = new List<App>();
         using (HttpClient client = new HttpClient())
         {
@@ -85,9 +85,9 @@ public class SteamApi(string apiKey)
         }
     }*/
 
-    public async Task<Game?> GetAppDetail(int id)
+    /*public async Task<Game?> GetAppDetail(int id)
     {
-        var url = Urls.appDetail;
+        var url = Urls.SteamAppDetail;
         url += $"?appids={id}";
         var response = await retryPolicy.ExecuteAsync(async () =>
         {
@@ -124,8 +124,11 @@ public class SteamApi(string apiKey)
         }
 
         var game = games[id].Data;
-        return game;
-    }
+        return new Game()
+        {
+            
+        };
+    }*/
     public static string CleanApiResponse(string input)
     {
         /*// Удаление HTML тегов

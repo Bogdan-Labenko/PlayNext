@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace PlayNextServer.Models;
 
-public class Genre
+public class GameMode
 {
     public int Id { get; set; }
     

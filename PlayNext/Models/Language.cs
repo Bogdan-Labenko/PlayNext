@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace PlayNextServer.Models;
 
-public class Genre
+public class Language
 {
     public int Id { get; set; }
     
@@ -10,14 +10,14 @@ public class Genre
     public Guid? Checksum { get; set; }
     
     [JsonPropertyName("updated_at")]
-    public DateTime? UpdatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
     
     [JsonPropertyName("name")]
     public string? Name { get; set; }
     
-    [JsonPropertyName("slug")]
-    public string? Slug { get; set; }
+    [JsonPropertyName("locale")]
+    public string? Locale { get; set; }
     
-    [JsonPropertyName("url")]
-    public int? Url { get; set; }
+    [JsonPropertyName("native_name")]
+    public string? NativeName { get; set; }
 }

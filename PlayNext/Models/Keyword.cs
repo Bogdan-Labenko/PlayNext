@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace PlayNextServer.Models;
 
-public class Genre
+public class Keyword
 {
     public int Id { get; set; }
     
@@ -19,5 +19,5 @@ public class Genre
     public string? Slug { get; set; }
     
     [JsonPropertyName("url")]
-    public int? Url { get; set; }
+    public string? Url { get; set; }
 }

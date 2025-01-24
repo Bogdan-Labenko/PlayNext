@@ -1,11 +1,20 @@
-using System.Text.Json.Serialization;
+namespace PlayNextServer.Models;
 
-namespace SteamParse.Models;
-
-public class Category
+public enum Category
 {
-    public int Id { get; set; }
-
-    [JsonPropertyName("description")]
-    public string Description { get; set; }
+    MainGame = 0,
+    DlcAddon,
+    Expansion,
+    Bundle,
+    StandaloneExpansion,
+    Mod,
+    Episode,
+    Season,
+    Remake,
+    Remaster,
+    ExpandedGame,
+    Port,
+    Fork,
+    Pack,
+    Update
 }

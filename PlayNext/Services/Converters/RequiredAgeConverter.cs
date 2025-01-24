@@ -2,7 +2,7 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace SteamParse.Converters;
+namespace PlayNextServer.Services.Converters;
 
 public class RequiredAgeConverter : JsonConverter<string>
 {
