@@ -4,6 +4,7 @@ namespace PlayNextServer.Models;
 
 public class Genre
 {
+    [JsonPropertyName("id")]
     public int Id { get; set; }
     
     [JsonPropertyName("checksum")]

@@ -4,6 +4,7 @@ namespace PlayNextServer.Models;
 
 public class Cover
 {
+    [JsonPropertyName("id")]
     public int Id { get; set; }
     
     [JsonPropertyName("alpha_channel")]
@@ -27,7 +28,7 @@ public class Cover
     public int? Width { get; set; }
     
     [JsonPropertyName("image_id")]
-    public int ImageId { get; set; }
+    public string ImageId { get; set; }
     
     [JsonPropertyName("url")]
     public int Url { get; set; }

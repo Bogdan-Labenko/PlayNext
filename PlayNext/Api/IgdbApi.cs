@@ -32,4 +32,80 @@ public class IgdbApi
         var games = JsonSerializer.Deserialize<IList<Game>>(json, JsonSettings.Options);
         return games;
     }
+    
+    public async Task<IList<AgeRating>?> UploadAgeRatings(int limit, int offset, int delay)
+    {
+        string request = Urls.GetAgeRatings;
+        var content = new StringContent($"fields *;sort id asc; limit {limit};offset {offset};");
+        var response = await _client.PostAsync(request, content);
+
+        response.EnsureSuccessStatusCode();
+        
+        var json = await response.Content.ReadAsStringAsync();
+        if (json is "null" or "[]")
+        {
+            return null;
+        }
+        Thread.Sleep(delay);
+        
+        var ratings = JsonSerializer.Deserialize<IList<AgeRating>>(json, JsonSettings.Options);
+        return ratings;
+    }
+    
+    public async Task<IList<Collection>?> UploadCollections(int limit, int offset, int delay)
+    {
+        string request = Urls.GetCollections;
+        var content = new StringContent($"fields *;sort id asc; limit {limit};offset {offset};");
+        var response = await _client.PostAsync(request, content);
+
+        response.EnsureSuccessStatusCode();
+        
+        var json = await response.Content.ReadAsStringAsync();
+        if (json is "null" or "[]")
+        {
+            return null;
+        }
+        Thread.Sleep(delay);
+        
+        var collections = JsonSerializer.Deserialize<IList<Collection>>(json, JsonSettings.Options);
+        return collections;
+    }
+    
+    public async Task<IList<CollectionType>?> UploadCollectionTypes(int limit, int offset, int delay)
+    {
+        string request = Urls.GetCollectionTypes;
+        var content = new StringContent($"fields *;sort id asc; limit {limit};offset {offset};");
+        var response = await _client.PostAsync(request, content);
+
+        response.EnsureSuccessStatusCode();
+        
+        var json = await response.Content.ReadAsStringAsync();
+        if (json is "null" or "[]")
+        {
+            return null;
+        }
+        Thread.Sleep(delay);
+        
+        var collections = JsonSerializer.Deserialize<IList<CollectionType>>(json, JsonSettings.Options);
+        return collections;
+    }
+    
+    public async Task<IList<T>?> UploadAll<T>(string? url, int limit, int offset, int delay)
+    {
+        string request = url;
+        var content = new StringContent($"fields *;sort id asc; limit {limit};offset {offset};");
+        var response = await _client.PostAsync(request, content);
+
+        response.EnsureSuccessStatusCode();
+        
+        var json = await response.Content.ReadAsStringAsync();
+        if (json is "null" or "[]")
+        {
+            return null;
+        }
+        Thread.Sleep(delay);
+        
+        var collection = JsonSerializer.Deserialize<IList<T>>(json, JsonSettings.Options);
+        return collection;
+    }
 }

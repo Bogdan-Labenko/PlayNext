@@ -4,7 +4,9 @@ namespace PlayNextServer.Models;
 
 public class GameLocalization
 {
+    [JsonPropertyName("id")]
     public int Id { get; set; }
+    
     [JsonPropertyName("checksum")]
     public Guid? Checksum { get; set; }
 

@@ -4,6 +4,7 @@ namespace PlayNextServer.Models;
 
 public class PlatformLogo
 {
+    [JsonPropertyName("id")]
     public int Id { get; set; }
     
     [JsonPropertyName("alpha_channel")]

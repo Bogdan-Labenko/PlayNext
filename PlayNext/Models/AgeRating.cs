@@ -4,6 +4,7 @@ namespace PlayNextServer.Models;
 
 public class AgeRating
 {
+    [JsonPropertyName("id")]
     public int Id { get; set; }
     [JsonPropertyName("category")]
     public AgeRatingType? Category { get; set; }

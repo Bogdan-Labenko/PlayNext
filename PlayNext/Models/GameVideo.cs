@@ -4,6 +4,7 @@ namespace PlayNextServer.Models;
 
 public class GameVideo
 {
+    [JsonPropertyName("id")]
     public int Id { get; set; }
     
     [JsonPropertyName("checksum")]

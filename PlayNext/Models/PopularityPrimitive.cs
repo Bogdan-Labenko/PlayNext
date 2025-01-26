@@ -4,6 +4,7 @@ namespace PlayNextServer.Models;
 
 public class PopularityPrimitive
 {
+    [JsonPropertyName("id")]
     public int Id { get; set; }
     [JsonPropertyName("calculated_at")]
     public DateTime? CalculatedAt { get; set; }

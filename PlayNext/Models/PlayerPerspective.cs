@@ -4,6 +4,7 @@ namespace PlayNextServer.Models;
 
 public class PlayerPerspective
 {
+    [JsonPropertyName("id")]
     public int Id { get; set; }
     [JsonPropertyName("checksum")]
     public Guid? Checksum { get; set; }

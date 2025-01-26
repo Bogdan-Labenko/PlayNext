@@ -4,6 +4,7 @@ namespace PlayNextServer.Models;
 
 public class Region
 {
+    [JsonPropertyName("id")]
     public int Id { get; set; }
     [JsonPropertyName("category")]
     public string? Category { get; set; }

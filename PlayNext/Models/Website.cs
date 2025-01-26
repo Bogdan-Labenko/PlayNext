@@ -4,6 +4,7 @@ namespace PlayNextServer.Models;
 
 public class Website
 {
+    [JsonPropertyName("id")]
     public int Id { get; set; }
 
     [JsonPropertyName("category")]

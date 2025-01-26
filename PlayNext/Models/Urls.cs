@@ -10,4 +10,7 @@ public static class Urls
     public const int MaxLimit = 500;
     public const string GetAccessToken = "https://id.twitch.tv/oauth2/token?client_id={0}&client_secret={1}&grant_type=client_credentials";
     public const string GetGames = "https://api.igdb.com/v4/games";
+    public const string GetAgeRatings = "https://api.igdb.com/v4/age_ratings";
+    public const string GetCollections = "https://api.igdb.com/v4/collections";
+    public const string GetCollectionTypes = "https://api.igdb.com/v4/collection_types";
 }

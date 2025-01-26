@@ -9,6 +9,7 @@ class AppDbContext : DbContext
     public DbSet<AgeRating> AgeRatings { get; set; }
     public DbSet<Artwork> Artworks { get; set; }
     public DbSet<Collection> Collections { get; set; }
+    public DbSet<CollectionType> CollectionTypes { get; set; }
     public DbSet<Cover> Covers { get; set; }
     public DbSet<Franchise> Franchises { get; set; }
     public DbSet<Game> Games { get; set; }

@@ -4,6 +4,7 @@ namespace PlayNextServer.Models;
 
 public class Keyword
 {
+    [JsonPropertyName("id")]
     public int Id { get; set; }
     
     [JsonPropertyName("checksum")]

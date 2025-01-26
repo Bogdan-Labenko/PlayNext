@@ -2,17 +2,20 @@ using System.Text.Json.Serialization;
 
 namespace PlayNextServer.Models;
 
-public class LanguageSupportType
+public class CollectionType
 {
     [JsonPropertyName("id")]
     public int Id { get; set; }
     
     [JsonPropertyName("checksum")]
-    public string Checksum { get; set; }
+    public Guid? Checksum { get; set; }
     
     [JsonPropertyName("updated_at")]
-    public DateTime UpdatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
     
     [JsonPropertyName("name")]
-    public string Name { get; set; }
+    public string? Name { get; set; }
+    
+    [JsonPropertyName("description")]
+    public string? Description { get; set; }
 }
