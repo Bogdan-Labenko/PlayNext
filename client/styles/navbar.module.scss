@@ -1,0 +1,73 @@
+$primary-dark: #081448;        // Темный оттенок
+$primary: #282157;             // Основной цвет
+$primary-medium: #1A2C80;      // Средний оттенок
+$primary-light: #4A478A;       // Светлый оттенок
+$primary-very-light: #D9F0FF;  // Ну прям светлый оттенок
+$primary-contrast: #66A7B5;
+
+.navbar {
+    background: linear-gradient(
+        to right,
+        $primary-medium,
+        $primary
+    );
+    flex: 1;
+    color: $primary-very-light;
+    width: 80px;
+    height: 100%;
+    display: flex;
+    position: fixed;
+    flex-flow: column wrap;
+    align-items: center;
+    transition: width 0.15s ease-out;
+    top: 0;
+    .div1{
+        flex: 1.5;
+        display: flex;
+        padding: 10px;
+        div{
+            height: 50px;
+            width: 60px;
+            .logo{
+                width: 100%;
+            }
+        }
+    }
+    .div2{
+        padding: 15px;
+        flex: 8;
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 30px;
+        align-items: flex-start;
+        width: 40px;
+
+        .iconWrapper {
+            position: relative;
+            width: 38px;   
+            height: 38px;
+
+            .icon {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                transition: opacity 0.18s ease-out;
+                opacity: 1;
+            }
+        }
+    }
+    .div3{
+        padding: 5px;
+        flex: 4;
+    }
+}
+
+.navbar:hover {
+    width: 115px;
+}
+
+.hidden {
+    opacity: 0 !important;
+}

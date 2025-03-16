@@ -1,0 +1,25 @@
+$primary-dark: #081448;        // Темный оттенок
+$primary: #282157;             // Основной цвет
+$primary-medium: #1A2C80;      // Средний оттенок
+$primary-light: #4A478A;       // Светлый оттенок
+$primary-very-light: #D9F0FF;  // Ну прям светлый оттенок
+$primary-contrast: #66A7B5;
+
+@font-face {
+    font-family: 'Exo-2-Bold';
+    src: url('/fonts/Exo2/Exo2-Bold.woff2') format('woff2');
+    font-weight: 800;
+    font-style: normal;
+}
+
+html{
+    background: $primary-dark;
+}
+body {
+    font-family: 'Exo-2-Bold';
+    width: 99vw;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    color: $primary-very-light;
+} 
