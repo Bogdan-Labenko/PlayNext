@@ -1,0 +1,87 @@
+$primary-dark: #081448;        // Темный оттенок
+$primary: #282157;             // Основной цвет
+$primary-medium: #1A2C80;      // Средний оттенок
+$primary-light: #5748BD;       // Светлый оттенок
+$primary-very-light: #D9F0FF;  // Ну прям светлый оттенок
+$primary-contrast: #4BB3FD;
+
+.background{
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.50);
+    width: 100vw;
+    height: 100vh;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+}
+.window{
+    position: fixed;
+    inset: 0;
+    top: 50vh;
+    left: 50vw;
+    width: 50vw;
+    height: 70vh;
+    transform: translate(-50%, -50%);
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(
+        to bottom,
+        $primary-light,
+        $primary-medium
+    );
+
+    .switch{
+        width: 40%;
+        height: 50px;
+        margin: 15px auto;
+        border: none;
+        border-radius: 50px;
+        background-color: #4A478A;
+        border: 2px solid $primary-contrast;
+        position: relative;
+        z-index: -2;
+        .logInButton{
+            float: left;
+            width: 50%;
+            line-height: 50px;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+        .signUpButton{
+            float: left;
+            width: 50%;
+            line-height: 50px;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+        .selector{
+            width: 50%;
+            height: 50px;
+            position: relative;
+            border: none;
+            border-radius: 50px;
+            background-color: #4BB3FD;
+            z-index: -1;
+            transition: 0.2s ease-out;
+        }
+        .selectorActive{
+            transform: translate(100%, 0);
+        }
+    }
+    .left{
+        width: 50%;
+        float: left;
+        display: flex;
+        flex-flow: column nowrap;
+        input[type="text"]{
+            width: 50%;
+            margin: 0 auto;
+            padding: 5px;
+            margin: 10px;
+        }
+    }
+    .right{
+        width: 50%;
+        float: left;
+    }
+}
