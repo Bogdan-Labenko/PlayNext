@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import styles from '../styles/navbar.module.scss'
+import stylesSignIn from "../styles/signIn.module.scss"
 import SignUpLogInModal from './SignUpLogInModal.jsx'
 
 export default function NavBar(){
@@ -50,7 +51,9 @@ export default function NavBar(){
                 </a>
             </div>
             <div className={styles.div3}>
-                <div className={styles.logIn} onClick={() => setIsModal(!isModal)}>
+                <div className={styles.logIn} onClick={() => {
+                        setIsModal(!isModal)
+                    }}>
                     <div className={styles.iconWrapper}>
                         <img
                             className={`${styles.icon} ${isHovered ? styles.hidden : ''}`}

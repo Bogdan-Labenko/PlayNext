@@ -5,18 +5,24 @@ $primary-light: #5748BD;       // Светлый оттенок
 $primary-very-light: #D9F0FF;  // Ну прям светлый оттенок
 $primary-contrast: #4BB3FD;
 
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+}
 .background{
     position: fixed;
     background-color: rgba(0, 0, 0, 0.50);
     width: 100vw;
     height: 100vh;
-    top: 50vh;
-    left: 50vw;
-    transform: translate(-50%, -50%);
+    z-index: 1001;
 }
 .window{
     position: fixed;
-    inset: 0;
+    z-index: 1002;
     top: 50vh;
     left: 50vw;
     width: 50vw;
@@ -62,7 +68,7 @@ $primary-contrast: #4BB3FD;
             border-radius: 50px;
             background-color: #4BB3FD;
             z-index: -1;
-            transition: 0.2s ease-out;
+            transition: transform 0.2s ease-out;
         }
         .selectorActive{
             transform: translate(100%, 0);
@@ -73,11 +79,51 @@ $primary-contrast: #4BB3FD;
         float: left;
         display: flex;
         flex-flow: column nowrap;
+        h2{
+            margin-top: 25px;
+            margin-bottom: 40px;
+        }
         input[type="text"]{
             width: 50%;
             margin: 0 auto;
             padding: 5px;
             margin: 10px;
+            color: $primary-very-light;
+            border: none;
+            border-radius: 50px;
+            padding: 10px;
+            background: linear-gradient(
+                to right,
+                $primary-contrast,
+                #4BB3FD,
+                $primary-very-light
+            );
+        }
+        input[type="text"]:focus{
+            outline: 2px solid $primary-contrast;
+        }
+        input[type="text"]::placeholder{
+            color: $primary-very-light;
+        }
+        
+        button{
+            margin-top: 25px;
+            border-radius: 50px;
+            font-size: 18px;
+            background: linear-gradient(
+                to right,
+                $primary-contrast,
+                #4BB3FD,
+                $primary-contrast
+            );
+            border: none;
+            color: $primary-very-light;
+            padding: 10px;
+            padding-left: 25px;
+            padding-right: 25px;
+        }
+        button:focus{
+            outline: 2px solid $primary-contrast;
         }
     }
     .right{
