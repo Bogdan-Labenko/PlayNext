@@ -3,7 +3,7 @@ $primary: #282157;             // Основной цвет
 $primary-medium: #1A2C80;      // Средний оттенок
 $primary-light: #4A478A;       // Светлый оттенок
 $primary-very-light: #D9F0FF;  // Ну прям светлый оттенок
-$primary-contrast: #66A7B5;
+$primary-contrast: #4BB3FD;
 
 .navbar {
     background: linear-gradient(
@@ -25,6 +25,7 @@ $primary-contrast: #66A7B5;
         flex: 1.5;
         display: flex;
         padding: 10px;
+        padding-top: 20px;
         div{
             height: 50px;
             width: 60px;
@@ -39,33 +40,40 @@ $primary-contrast: #66A7B5;
         display: flex;
         flex-flow: column nowrap;
         gap: 30px;
-        align-items: flex-start;
+        justify-content: flex-start;
         width: 40px;
-
-        .iconWrapper {
-            position: relative;
-            width: 38px;   
-            height: 38px;
-
-            .icon {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                transition: opacity 0.18s ease-out;
-                opacity: 1;
-            }
-        }
     }
     .div3{
         padding: 5px;
         flex: 4;
+        display: flex;
+        flex-flow: column;
+        justify-content: flex-end;
+        padding-bottom: 20px;
+        .logIn{
+            cursor: pointer;
+        }
+    }
+}
+
+.iconWrapper {
+    position: relative;
+    width: 38px;   
+    height: 38px;
+
+    .icon {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transition: opacity 0.18s ease-out;
+        opacity: 1;
     }
 }
 
 .navbar:hover {
-    width: 115px;
+    width: 95px;
 }
 
 .hidden {

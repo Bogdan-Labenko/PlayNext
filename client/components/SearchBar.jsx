@@ -1,4 +1,4 @@
-import styles from '../styles/search-bar.module.scss';
+import styles from '../styles/searchBar.module.scss';
 
 export default function SearchBar(){
     return <div className={styles.searchBlock}>

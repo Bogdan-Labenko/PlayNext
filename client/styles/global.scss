@@ -15,8 +15,10 @@ $primary-contrast: #66A7B5;
 html{
     background: $primary-dark;
 }
-body {
+*{
     font-family: 'Exo-2-Bold';
+}
+body {
     width: 99vw;
     margin: 0;
     padding: 0;

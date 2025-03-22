@@ -1,0 +1,133 @@
+$primary-dark: #081448;        // Темный оттенок
+$primary: #282157;             // Основной цвет
+$primary-medium: #1A2C80;      // Средний оттенок
+$primary-light: #5748BD;       // Светлый оттенок
+$primary-very-light: #D9F0FF;  // Ну прям светлый оттенок
+$primary-contrast: #4BB3FD;
+
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+}
+.background{
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.50);
+    width: 100vw;
+    height: 100vh;
+    z-index: 1001;
+}
+.window{
+    position: fixed;
+    z-index: 1002;
+    top: 50vh;
+    left: 50vw;
+    width: 50vw;
+    height: 70vh;
+    transform: translate(-50%, -50%);
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(
+        to bottom,
+        $primary-light,
+        $primary-medium
+    );
+
+    .switch{
+        width: 40%;
+        height: 50px;
+        margin: 15px auto;
+        border: none;
+        border-radius: 50px;
+        background-color: #4A478A;
+        border: 2px solid $primary-contrast;
+        position: relative;
+        z-index: -2;
+        .logInButton{
+            float: left;
+            width: 50%;
+            line-height: 50px;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+        .signUpButton{
+            float: left;
+            width: 50%;
+            line-height: 50px;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+        .selector{
+            width: 50%;
+            height: 50px;
+            position: relative;
+            border: none;
+            border-radius: 50px;
+            background-color: #4BB3FD;
+            z-index: -1;
+            transition: transform 0.2s ease-out;
+        }
+        .selectorActive{
+            transform: translate(100%, 0);
+        }
+    }
+    .left{
+        width: 50%;
+        float: left;
+        display: flex;
+        flex-flow: column nowrap;
+        h2{
+            margin-top: 25px;
+            margin-bottom: 40px;
+        }
+        input[type="text"]{
+            width: 50%;
+            margin: 0 auto;
+            padding: 5px;
+            margin: 10px;
+            color: $primary-very-light;
+            border: none;
+            border-radius: 50px;
+            padding: 10px;
+            background: linear-gradient(
+                to right,
+                $primary-contrast,
+                #4BB3FD,
+                $primary-very-light
+            );
+        }
+        input[type="text"]:focus{
+            outline: 2px solid $primary-contrast;
+        }
+        input[type="text"]::placeholder{
+            color: $primary-very-light;
+        }
+        
+        button{
+            margin-top: 25px;
+            border-radius: 50px;
+            font-size: 18px;
+            background: linear-gradient(
+                to right,
+                $primary-contrast,
+                #4BB3FD,
+                $primary-contrast
+            );
+            border: none;
+            color: $primary-very-light;
+            padding: 10px;
+            padding-left: 25px;
+            padding-right: 25px;
+        }
+        button:focus{
+            outline: 2px solid $primary-contrast;
+        }
+    }
+    .right{
+        width: 50%;
+        float: left;
+    }
+}

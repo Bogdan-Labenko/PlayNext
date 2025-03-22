@@ -3,7 +3,7 @@ $primary: #282157;             // Основной цвет
 $primary-medium: #1A2C80;      // Средний оттенок
 $primary-light: #4A478A;       // Светлый оттенок
 $primary-very-light: #D9F0FF;  // Ну прям светлый оттенок
-$primary-contrast: #66A7B5;
+$primary-contrast: #4BB3FD;
 
 .searchBlock{
     width: fit-content;
@@ -27,11 +27,11 @@ $primary-contrast: #66A7B5;
         top: 0;
         left: 50%;
         transform: translate(-50%, -150%);
-        transition: transform 0.3s ease;
+        transition: transform 0.18s ease-out;
         display: flex;
         margin: 0 auto;
         margin-top: 8px;
-        border: 1px solid #d9f0ff43;
+        border: 1px solid $primary-contrast;
         border-radius: 15px;
         width: fit-content;
         padding-bottom: 1px;
