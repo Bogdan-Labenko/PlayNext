@@ -7,7 +7,7 @@ export default function SearchBar(){
         </div>
         <div className={styles.searchBar}>
             <input placeholder='Search' type="text" />
-            <button>&#215;</button>
+            <button style={{fontFamily: "arial"}}>&#215;</button>
         </div>
     </div>
 }
