@@ -1,10 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using PlayNextServer.Models;
+using PlayNextServer.Models.Auth;
 
 namespace PlayNextServer;
 
-class AppDbContext : DbContext
+public class AppDbContext : DbContext
 {
     public DbSet<AgeRating> AgeRatings { get; set; }
     public DbSet<Artwork> Artworks { get; set; }
@@ -37,6 +38,9 @@ class AppDbContext : DbContext
     public DbSet<Screenshot> Screenshots { get; set; }
     public DbSet<Theme> Themes { get; set; }
     public DbSet<Website> Websites { get; set; }
+    
+    
+    public DbSet<User> Users { get; set; }
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

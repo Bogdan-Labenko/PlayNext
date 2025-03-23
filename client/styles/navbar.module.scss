@@ -72,6 +72,16 @@ $primary-contrast: #4BB3FD;
     }
 }
 
+.avatar{
+    
+    img{
+        border-radius: 50px;
+        width: 60px !important;
+        height: 60px !important;
+    }
+}
+
+
 .navbar:hover {
     width: 95px;
 }
