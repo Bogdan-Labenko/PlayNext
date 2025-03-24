@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PlayNextServer.DTOs.Auth;
@@ -59,6 +61,16 @@ public class AuthController : ControllerBase
 
         var token = await _tokenService.GenerateJwtTokenAsync(request.Email, request.Role);
         
+        var cookieOptions = new CookieOptions()
+        {
+            HttpOnly = true,    // Устанавливаем флаг HttpOnly
+            Secure = true,      // Только по https
+            SameSite = SameSiteMode.Strict, // Защита от CSRF
+            Expires = DateTime.UtcNow.AddDays(14) // Время жизни cookie
+        };
+
+        Response.Cookies.Append("token", token, cookieOptions);
+        
         return Ok(new SignUpResponse()
         {
             User = new UserDto
@@ -67,8 +79,7 @@ public class AuthController : ControllerBase
                 Nickname = request.Nickname,
                 Role = request.Role,
                 Id = user.Entity.Id
-            },
-            AccessToken = token
+            }
         });
     }
     
@@ -91,7 +102,17 @@ public class AuthController : ControllerBase
 
         var token = await _tokenService.GenerateJwtTokenAsync(request.Email, user.Role);
         
-        return Ok(new LogInResponse()
+        var cookieOptions = new CookieOptions
+        {
+            HttpOnly = true,    // Устанавливаем флаг HttpOnly
+            Secure = true,      // Только по https
+            SameSite = SameSiteMode.Strict, // Защита от CSRF
+            Expires = DateTime.UtcNow.AddDays(14) // Время жизни cookie
+        };
+
+        Response.Cookies.Append("token", token, cookieOptions);
+        
+        return Ok(new LogInResponse
         {
             User = new UserDto
             {
@@ -99,8 +120,22 @@ public class AuthController : ControllerBase
                 Nickname = user.Nickname,
                 Role = user.Role,
                 Email = user.Email
-            },
-            AccessToken = token
+            }
         });
+    }
+    [Authorize]
+    [HttpPost("logout")]
+    public IActionResult Logout()
+    {
+        var cookieOptions = new CookieOptions
+        {
+            HttpOnly = true,
+            Secure = true,
+            SameSite = SameSiteMode.Lax,
+            Expires = DateTime.UtcNow
+        };
+
+        Response.Cookies.Append("token", "", cookieOptions);
+        return Ok(new { message = "Logged out" });
     }
 }

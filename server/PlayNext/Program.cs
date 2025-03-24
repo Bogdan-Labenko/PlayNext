@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
@@ -9,34 +10,46 @@ using PlayNextServer.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var Configuration = builder.Configuration;
+
 
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors(options =>
 {
-	options.AddPolicy("AllowAllOrigins", builder =>
+	options.AddPolicy("AllowFrontend", policy =>
 	{
-		builder.AllowAnyOrigin()
-			.AllowAnyMethod()
-			.AllowAnyHeader();
+		policy.WithOrigins("http://localhost:3000")
+			.AllowCredentials()
+			.AllowAnyHeader()
+			.AllowAnyMethod();
 	});
 });
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 	.AddJwtBearer(options =>
 	{
+		options.Events = new JwtBearerEvents
+		{
+			OnMessageReceived = context =>
+			{
+				context.Token = context.Request.Cookies["token"];
+				return Task.CompletedTask;
+			}
+		};
+		
 		options.TokenValidationParameters = new TokenValidationParameters()
 		{
 			ValidateIssuer = true,
 			ValidateAudience = true,
 			ValidateLifetime = true,
-			ValidIssuer = Configuration["Jwt:Issuer"],
-			ValidAudience = Configuration["Jwt:Audience"],
-			IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:SecretKey"]))
+			ValidIssuer = builder.Configuration["Jwt:Issuer"],
+			ValidAudience = builder.Configuration["Jwt:Audience"],
+			IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecretKey"]))
 		};
 	});
+
+builder.Services.AddAuthorization();
 
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 builder.Services.AddScoped<AppDbContext>();
@@ -49,12 +62,18 @@ if (app.Environment.IsDevelopment())
 	app.UseSwaggerUI();
 }
 
-// Настраиваем маршруты и Middleware
+app.UseCookiePolicy(new CookiePolicyOptions
+{
+	MinimumSameSitePolicy = SameSiteMode.Strict,
+	Secure = CookieSecurePolicy.Always
+});
+
 app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers(); // Автоматически подключает контроллеры
 
-app.UseCors("AllowAllOrigins");
+app.UseCors("AllowFrontend");
 
 app.Run(); // Запускаем сервер
 

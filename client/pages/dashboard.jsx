@@ -1,17 +1,32 @@
-import { useDispatch } from "react-redux";
-import { logout } from "../slices/userSlice";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { logout } from "../slices/userSlice"; // Импортируем action logout
 
-export default function Dashboard(){
+export default function Dashboard() {
     const router = useRouter();
     const dispatch = useDispatch();
 
-    return(
-        <div>
-            <button onClick={() => {
+    const handleLogout = async () => {
+        try {
+            const response = await fetch('http://localhost:5000/api/auth/logout', {
+                method: 'POST',
+                credentials: 'include',
+            });
+
+            if (response.ok) {
                 dispatch(logout());
                 router.push("/");
-            }}>Log out</button>
+            } else {
+                console.error("Ошибка при выходе");
+            }
+        } catch (error) {
+            console.error("Ошибка сети:", error);
+        }
+    };
+
+    return (
+        <div>
+            <button onClick={handleLogout}>Log out</button>
         </div>
-    )
+    );
 }

@@ -15,7 +15,7 @@ import {
 const persistConfig = {
   key: 'root',
   storage, // Local storage for persistence
-  whitelist: ['user'], // Do not persist 'register' slice or actions that store functions
+  whitelist: ['user']
 };
 
 const rootReducer = combineReducers({

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import styles from "../styles/signUp.module.scss"
 import Waiting from "./lotties/Waiting.jsx"
 import { useRouter } from "next/navigation"
-import { setUser } from "../slices/userSlice.js";
+import { logout, setUser } from "../slices/userSlice.js";
 import { useDispatch } from "react-redux";
 import { revalidatePath } from "next/cache.js";
 
@@ -23,6 +23,7 @@ export default function SignUpLogInModal({ setIsModal }){
         
         const response = await fetch('http://localhost:5000/api/auth/login', {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -32,7 +33,7 @@ export default function SignUpLogInModal({ setIsModal }){
 
         if (response.ok) {
             const data = await response.json();
-            dispatch(setUser({ user: data.user, token: data.accessToken }));
+            dispatch(setUser({ user: data.user }));
             router.refresh();
         } 
         else {
@@ -46,6 +47,7 @@ export default function SignUpLogInModal({ setIsModal }){
     
         const response = await fetch('http://localhost:5000/api/auth/signup', {
           method: 'POST',
+          credentials: 'include',
           headers: {
             'Content-Type': 'application/json',
           },
@@ -54,9 +56,8 @@ export default function SignUpLogInModal({ setIsModal }){
     
         if (response.ok) {
             const data = await response.json();
-            dispatch(setUser({ user: data.user, token: data.accessToken }));
-            revalidatePath("recommendations")
-            router.push("/recommendations", { });
+            dispatch(setUser({ user: data.user }));
+            router.push("/dashboard");
         } 
         else {
             const data = await response.json();
