@@ -83,7 +83,7 @@ $primary-contrast: #4BB3FD;
             margin-top: 25px;
             margin-bottom: 40px;
         }
-        input[type="text"]{
+        input[type="text"], input[type="password"]{
             width: 50%;
             margin: 0 auto;
             padding: 5px;
@@ -102,7 +102,13 @@ $primary-contrast: #4BB3FD;
         input[type="text"]:focus{
             outline: 2px solid $primary-contrast;
         }
+        input[type="password"]:focus{
+            outline: 2px solid $primary-contrast;
+        }
         input[type="text"]::placeholder{
+            color: $primary-very-light;
+        }
+        input[type="password"]::placeholder{
             color: $primary-very-light;
         }
         
