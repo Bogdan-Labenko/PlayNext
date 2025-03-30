@@ -5,14 +5,19 @@ export const GET_GAMES_BY_NAME = gql`
     gamesByName(name: $name, limit: $limit) {
       id
       name
-      slug
-      releaseDates {
-        date
-        status {
-          id
-        }
+      firstReleaseDate
+      releaseDates{
+        id
+      }
+      platformsId
+      platforms{
+        id
       }
       cover{
+        imageId
+      }
+      artworks{
+        id
         imageId
       }
     }

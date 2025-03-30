@@ -56,6 +56,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 builder.Services.AddScoped<AppDbContext>();
 builder.Services.AddScoped<IgdbApi>();
+builder.Services.AddScoped<GraphQLIncludeService>();
 builder.Services
 	.AddGraphQLServer()
 	.AddType<Query>()
