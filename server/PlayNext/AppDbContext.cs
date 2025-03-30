@@ -39,7 +39,6 @@ public class AppDbContext : DbContext
     public DbSet<Theme> Themes { get; set; }
     public DbSet<Website> Websites { get; set; }
     
-    
     public DbSet<User> Users { get; set; }
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -57,5 +56,11 @@ public class AppDbContext : DbContext
             .HasOne<Cover>(g => g.Cover)
             .WithOne(c => c.Game)
             .HasForeignKey<Cover>(c => c.GameId);*/
+        
+        /*modelBuilder.Entity<Game>()
+            .HasOne(g => g.Cover)
+            .WithOne(c => c.Game)
+            .HasForeignKey()
+            .OnDelete(DeleteBehavior.Cascade);*/
     }
 }

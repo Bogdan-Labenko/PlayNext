@@ -6,15 +6,12 @@ $primary-very-light: #D9F0FF;  // Ну прям светлый оттенок
 $primary-contrast: #4BB3FD;
 
 .searchBlock{
+    position: relative;
     width: fit-content;
     margin: 0 auto;
     height: 40px;
     padding: 2px;
-    // background: linear-gradient(
-    //     to bottom,
-    //     $primary-dark,
-    //     $primary-medium
-    // );
+    transition: opacity 0.3s ease-out;
     .arrow{
         margin-top: 10px;
         img{
@@ -23,10 +20,11 @@ $primary-contrast: #4BB3FD;
         }
     }
     .searchBar{
+        transform: translate(-50%, 0);
         position: absolute;
         top: 0;
         left: 50%;
-        transform: translate(-50%, -150%);
+        transform: translate(-50%, -300%);
         transition: transform 0.18s ease-out;
         display: flex;
         margin: 0 auto;
@@ -77,6 +75,54 @@ $primary-contrast: #4BB3FD;
             transition: 0.2s ease-in;
         }
     }
+    .searchBarResult{
+        border-radius: 15px 15px 0 0;
+    }
+    .results{
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -10px);
+        width: calc(20vw + 35px);
+        background: linear-gradient(
+            to right,
+            $primary,
+            $primary-medium
+        );
+        display: flex;
+        flex-flow: column nowrap;
+        border-radius: 0 0 15px 15px;
+        border: 1px solid $primary-contrast;
+        border-top: none;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        padding: 10px;
+        z-index: 10;
+        opacity: 0;
+        transition: opacity 0.18s ease-out, transform 0.18s ease-out;
+        .gameItem{
+            text-decoration: none;
+            color: white;
+            margin: 0 auto;
+            min-height: 140px;
+            display: flex;
+            gap: 15px;
+            width: calc(100% - 40px);
+            .imgBox{
+                flex: 2;
+            }
+            .textBox{
+                flex: 3;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            img{
+                height: 120px;
+                width: 90px;
+                float: left;
+            }
+        }
+    }
 }
 .searchBlock:hover .arrow {
     opacity: 0; /* Стрелка исчезает */
@@ -85,5 +131,11 @@ $primary-contrast: #4BB3FD;
 
 .searchBlock:hover .searchBar,
 .searchBlock:focus-within .searchBar {
-    transform: translate(-50%, 0); /* Остается видимой */
+    transform: translate(-50%, 0);
+}
+
+.searchBlock:hover .results,
+.searchBlock:focus-within .results {
+    opacity: 1;
+    transform: translate(-50%, 41px);
 }

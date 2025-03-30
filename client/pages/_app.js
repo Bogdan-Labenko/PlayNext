@@ -13,10 +13,3 @@ export default function App({ Component, pageProps }) {
         </PersistGate>
     </Provider>
 }
-
-// export default function App({ Component, pageProps }) {
-//     return <Layout store={store}>
-//                 <Component {...pageProps} />
-//             </Layout>
-// }
-

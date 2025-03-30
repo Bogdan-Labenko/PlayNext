@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using PlayNextServer;
+using PlayNextServer.Api;
+using PlayNextServer.Controllers.Gql;
 using PlayNextServer.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -53,6 +55,13 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 builder.Services.AddScoped<AppDbContext>();
+builder.Services.AddScoped<IgdbApi>();
+builder.Services
+	.AddGraphQLServer()
+	.AddType<Query>()
+	.AddProjections()
+	.AddFiltering()
+	.AddSorting();
 
 var app = builder.Build();
 
@@ -72,6 +81,8 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers(); // Автоматически подключает контроллеры
+
+app.MapGraphQL();
 
 app.UseCors("AllowFrontend");
 

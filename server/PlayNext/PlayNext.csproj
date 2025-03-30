@@ -14,6 +14,8 @@
            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
        </None>
       <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+      <PackageReference Include="HotChocolate.AspNetCore" Version="15.1.3" />
+      <PackageReference Include="HotChocolate.Data.EntityFramework" Version="15.1.3" />
       <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.8" />
       <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.2" />
       <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.3.0" />
