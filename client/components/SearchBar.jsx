@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from '../styles/searchBar.module.scss';
 import { useLazyQuery } from '@apollo/client';
 import client from '../api/apolloClient';
@@ -11,10 +11,11 @@ export default function SearchBar(){
     const [isFocused, setIsFocused] = useState(false);
     const ImageURL = "https://images.igdb.com/igdb/image/upload/t_cover_small/"
     const router = useRouter();
+    const inputRef = useRef(null);
 
     useEffect(() => {
         const handler = setTimeout(() => {
-          setDebouncedQuery(query);
+          setDebouncedQuery(query.trim());
         }, 400);
     
         return () => {
@@ -36,6 +37,7 @@ export default function SearchBar(){
         if (e.key === "Enter") {
             if (!query.trim()) return;
             
+            inputRef.current.blur();
             router.push(`/search?query=${encodeURIComponent(query)}`);
         }
     }
@@ -54,6 +56,7 @@ export default function SearchBar(){
                 value={query}
                 onFocus={() => setIsFocused(true)}
                 onKeyDown={handleKeyDown}
+                ref={inputRef}
             />
             <button 
                 style={{fontFamily: "arial"}}
