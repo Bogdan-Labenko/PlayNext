@@ -3,7 +3,7 @@ using HotChocolate.Execution.Processing;
 using HotChocolate.Language;
 using HotChocolate.Resolvers;
 using Microsoft.EntityFrameworkCore;
-using PlayNextServer.Models;
+using PlayNextServer.Models.Database_v1;
 
 namespace PlayNextServer.Services;
 

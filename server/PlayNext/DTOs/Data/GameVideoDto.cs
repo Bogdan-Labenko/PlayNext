@@ -1,0 +1,21 @@
+using System.Text.Json.Serialization;
+
+namespace PlayNextServer.DTOs.Data;
+
+public class GameVideoDto
+{
+    [JsonPropertyName("id")]
+    public int Id { get; set; }
+
+    [JsonPropertyName("checksum")]
+    public string? Checksum { get; set; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; set; }
+
+    [JsonPropertyName("game")]
+    public int? GameId { get; set; }
+
+    [JsonPropertyName("video_id")]
+    public string? VideoId { get; set; }
+}

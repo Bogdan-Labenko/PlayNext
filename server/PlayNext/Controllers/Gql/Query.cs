@@ -1,10 +1,8 @@
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using HotChocolate.Resolvers;
-using Microsoft.EntityFrameworkCore;
-using PlayNextServer.Models;
+using PlayNextServer.Models.Database_v1;
 using PlayNextServer.Services;
-using Timer = System.Timers.Timer;
 
 namespace PlayNextServer.Controllers.Gql;
 
@@ -37,15 +35,14 @@ public class Query
     )
     {
         string _name = name;
-        _name = _name.ToLower().Trim(); // Привести к нижнему регистру
+        _name = _name.ToLower().Trim();
         _name = Regex.Replace(_name, @"\s+", "-"); // Заменить пробелы на '-'
         _name = Regex.Replace(_name, @"[^a-z0-9\-]", "");
 
         var query = context.Games
             .Where(g =>
-                g.Category == Category.MainGame &&
-                g.Slug.Contains(_name) &&
-                g.VersionParentId == 0
+                g.GameType.Type == "Main Game" &&
+                g.Slug.Contains(_name)
             );
         var timer = new Stopwatch();
         
@@ -55,7 +52,7 @@ public class Query
         Console.WriteLine("Milliseconds: " + timer.Elapsed.TotalMilliseconds);
         query = tempQuery
             .OrderByDescending(g => g.Slug.Equals(_name))
-            .ThenByDescending(g => g.Rating)
+            .ThenByDescending(g => g.AggregatedRating)
             .ThenByDescending(g => g.Slug.StartsWith(_name))
             .ThenByDescending(g => g.FirstReleaseDate);
 

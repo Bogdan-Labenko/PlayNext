@@ -3,7 +3,7 @@ using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Web;
 using PlayNextServer.DTOs;
-using PlayNextServer.Models;
+using PlayNextServer.Models.Database_v1;
 
 namespace PlayNextServer.Api;
 
