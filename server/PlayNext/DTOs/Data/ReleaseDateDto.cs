@@ -8,10 +8,7 @@ public class ReleaseDateDto
     public int Id { get; set; }
     
     [JsonPropertyName("date")]
-    public DateTime Date { get; set; }
-    
-    [JsonPropertyName("date_format")]
-    public DateTime DateFormat { get; set; }
+    public DateTime? Date { get; set; }
     
     [JsonPropertyName("game")]
     public int? GameId { get; set; }
@@ -26,8 +23,8 @@ public class ReleaseDateDto
     public string Checksum { get; set; }
     
     [JsonPropertyName("created_at")]
-    public DateTime CreatedAt { get; set; }
+    public DateTime? CreatedAt { get; set; }
     
     [JsonPropertyName("updated_at")]
-    public DateTime UpdatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
 }

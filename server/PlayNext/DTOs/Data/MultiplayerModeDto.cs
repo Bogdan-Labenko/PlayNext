@@ -23,7 +23,7 @@ public class MultiplayerModeDto
     public bool HasOfflineCoop { get; set; }
     
     [JsonPropertyName("offlinecoopmax")]
-    public bool HasOfflineCoopMax { get; set; }
+    public int OfflineCoopMax { get; set; }
     
     [JsonPropertyName("offlinemax")]
     public int OfflineMax { get; set; }

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using PlayNextServer.Api;
@@ -39,33 +32,33 @@ public class FetchingController : ControllerBase
         int offset = 0;
 		while(true)
         {
-            var collectionDto = await _igdb.UploadAll<GameDto>(Urls.GetGames, Urls.MaxLimit, offset, 400);
+            var collectionDto = await _igdb.UploadAll<ReleaseDateDto>(Urls.GetReleaseDates, Urls.MaxLimit, offset, 150);
 
             if (collectionDto is null || collectionDto.Count == 0)
             {
                 break;
             }
 
-            /*var collection = collectionDto.ToModel(c => new PlayerPerspective
+            var collection = collectionDto.ToModel(c => new ReleaseDate
             {
                 Id = c.Id,
                 Checksum = c.Checksum,
                 CreatedAt = c.CreatedAt,
                 UpdatedAt = c.UpdatedAt,
-                Name = c.Name,
-                Slug = c.Slug,
-            });*/
+                Date = c.Date,
+            });
             
-            foreach (var entity in collectionDto)
+            foreach (var entity in collection)
             {
                 /*if (entity.GameId.HasValue && !existingGameIds.Contains(entity.GameId.Value))
                 {
                     entity.GameId = null; // Убираем некорректный CoverId сразу
                 }*/
 
-                var find = await _context.PlayerPerspectives
+                var find = await _context.ReleaseDateStatuses
                     .AsNoTracking()
                     .FirstOrDefaultAsync(c => c.Id == entity.Id);
+                
                 if (find is not null)
                 {
                     //await _context.PlayerPerspectives.AddAsync(entity);
@@ -74,20 +67,7 @@ public class FetchingController : ControllerBase
                 
                 
                 
-                /*var company = new Company
-                {
-                    Id = entity.Id,
-                    Checksum = entity.Checksum,
-                    Name = entity.Name,
-                    CreatedAt = entity.CreatedAt,
-                    UpdatedAt = entity.UpdatedAt,
-                    Slug = entity.Slug,
-                    Description = entity.Description,
-                    LogoId = entity.LogoId,
-                    CountryCode = entity.CountryCode,
-                    StartDate = entity.StartDate,
-                    ParentCompanyId = entity.ParentCompanyId
-                };*/
+                
                 /*
                     find.Id = entity.Id;
                     find.Checksum = entity.Checksum;
@@ -98,7 +78,53 @@ public class FetchingController : ControllerBase
                     find.Description = entity.Description;
                     find.LogoId = entity.LogoId;
                  */
+                
+                //Game
+                if (entity.GameId is not null)
+                {
+                    var game = await _context.Games
+                        .FirstOrDefaultAsync(g => g.Id == entity.GameId);
+                    if (game is not null)
+                    {
+                        entity.Game = game;         
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+                //ReleaseDateStatuses
+                if (entity.ReleaseDateStatusId is not null)
+                {
+                    var status = await _context.ReleaseDateStatuses
+                        .FirstOrDefaultAsync(g => g.Id == entity.ReleaseDateStatusId);
+                    if (status is not null)
+                    {
+                        entity.Status = status;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+                //Platform
+                if (entity.PlatformId is not null)
+                {
+                    var platform = await _context.Platforms
+                        .FirstOrDefaultAsync(g => g.Id == entity.PlatformId);
+                    if (platform is not null)
+                    {
+                        entity.Platform = platform;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+                
+                await _context.ReleaseDates.AddAsync(entity);
             }
+            
             await _context.SaveChangesAsync();
             _context.ChangeTracker.Clear();
 
@@ -164,17 +190,12 @@ public class FetchingController : ControllerBase
     [HttpGet("upload_2")]
 	public async Task UploadA()
 	{
-        int offset = 0;
+        int offset = 9000;
 		while(true)
         {
             var collectionDto = await _igdb.UploadAll<GameDto>(Urls.GetGames, Urls.MaxLimit, offset, 0);
 
             if (collectionDto is null || collectionDto.Count == 0)
-            {
-                break;
-            }
-
-            if (offset > 0)
             {
                 break;
             }
@@ -206,6 +227,11 @@ public class FetchingController : ControllerBase
                 if (find is not null)
                 {
                     continue;
+                }
+
+                if (entity.GameStatusId == 0)
+                {
+                    entity.GameStatusId = null;
                 }
 
                 var game = new Game()
@@ -324,7 +350,7 @@ public class FetchingController : ControllerBase
                         game.Keywords = keywords;
                     }
                 }
-                //Keywords
+                //LanguageSupports
                 if (entity.LanguageSupportsId is not null && entity.LanguageSupportsId.Count > 0)
                 {
                     var ls = await _context.LanguageSupports
@@ -475,15 +501,26 @@ public class FetchingController : ControllerBase
 	}
     
     [Route("test")]
-    public async Task<IActionResult> Games()
+    public async Task<IActionResult> Games(string setName)
     {
-        /*string a = "red";
-        var games = await _context.Games.Include(g => g.Platforms).Where(g => g.Slug.Contains(a)).Take(10).ToListAsync();
-        var json = JsonSerializer.Serialize(games);
-        return Ok(json);*/
-        var game = _context.Games.Include(e => e.Genres)
-            .FirstOrDefault();
-        return Ok(game);
+        if (string.IsNullOrWhiteSpace(setName))
+            return BadRequest("Set name is required.");
+
+        var property = _context.GetType().GetProperties()
+            .FirstOrDefault(p => string.Equals(p.Name, setName, StringComparison.OrdinalIgnoreCase));
+
+        if (property == null)
+            return NotFound($"DbSet '{setName}' not found.");
+
+        var dbSet = property.GetValue(_context) as IQueryable<object>;
+
+        if (dbSet == null)
+            return StatusCode(500, "Invalid DbSet type.");
+
+        // Выполняем подсчёт
+        int count = dbSet.Count();
+
+        return Ok(new { Set = setName, Count = count });
         
         //Продолжить скачивание всего что нужно и потом скачивание игры со всеми связями
     }

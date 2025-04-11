@@ -6,10 +6,10 @@ public class InvolvedCompany
 {
     public int Id { get; set; }
     
-    public int CompanyId { get; set; }
+    public int? CompanyId { get; set; }
     public Company? Company { get; set; }
     
-    public DateTime CreatedAt { get; set; }
+    public DateTime? CreatedAt { get; set; }
     
     public string? Checksum { get; set; }
     

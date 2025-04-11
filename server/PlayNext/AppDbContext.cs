@@ -159,7 +159,7 @@ public class AppDbContext : DbContext
             .WithMany(g => g.Videos)
             .HasForeignKey(a => a.GameId)
             .OnDelete(DeleteBehavior.SetNull);
-        
+
         /*modelBuilder.Entity<Game>()
             .HasMany(g => g.Genres)
             .WithMany(g => g.Games)
@@ -183,8 +183,8 @@ public class AppDbContext : DbContext
                     j.ToTable("GameGenres");
                 }
             );*/
-        
-        
-        
+
+
+
     }
 }

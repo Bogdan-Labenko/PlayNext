@@ -24,7 +24,7 @@ public static class Urls
     public const string GetGameTypes = "https://api.igdb.com/v4/game_types";
     public const string GetGameVideos = "https://api.igdb.com/v4/game_videos";
     public const string GetGenres = "https://api.igdb.com/v4/genres";
-    public const string GetInvolvedCompany = "https://api.igdb.com/v4/involved_companies";
+    public const string GetInvolvedCompanies = "https://api.igdb.com/v4/involved_companies";
     public const string GetKeywords = "https://api.igdb.com/v4/keywords";
     public const string GetLanguageSupports = "https://api.igdb.com/v4/language_supports";
     public const string GetLanguageSupportTypes = "https://api.igdb.com/v4/language_support_types";

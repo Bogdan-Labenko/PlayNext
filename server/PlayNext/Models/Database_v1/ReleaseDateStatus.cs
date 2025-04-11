@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace PlayNextServer.Models;
+namespace PlayNextServer.Models.Database_v1;
 
 public class ReleaseDateStatus
 {

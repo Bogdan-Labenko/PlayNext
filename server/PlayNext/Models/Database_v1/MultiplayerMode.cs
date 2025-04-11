@@ -17,7 +17,7 @@ public class MultiplayerMode
     
     public bool HasOfflineCoop { get; set; }
     
-    public bool HasOfflineCoopMax { get; set; }
+    public int OfflineCoopMax { get; set; }
     
     public int OfflineMax { get; set; }
     
@@ -36,7 +36,7 @@ public class MultiplayerMode
     
     public string Checksum { get; set; }
     
-    public DateTime CreatedAt { get; set; }
+    public DateTime? CreatedAt { get; set; }
     
-    public DateTime UpdatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
 }

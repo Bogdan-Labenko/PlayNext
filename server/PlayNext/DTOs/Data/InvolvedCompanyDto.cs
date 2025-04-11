@@ -29,7 +29,7 @@ public class InvolvedCompanyDto
     public string? Checksum { get; set; }
     
     [JsonPropertyName("created_at")]
-    public DateTime CreatedAt { get; set; }
+    public DateTime? CreatedAt { get; set; }
     
     [JsonPropertyName("updated_at")]
     public DateTime? UpdatedAt { get; set; }
