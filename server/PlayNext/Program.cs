@@ -65,7 +65,7 @@ builder.Services.AddScoped<IgdbApi>();
 builder.Services.AddScoped<GraphQLIncludeService>();
 builder.Services
 	.AddGraphQLServer()
-	.AddType<Query>()
+	.AddQueryType<GameQuery>()
 	.AddProjections()
 	.AddFiltering()
 	.AddSorting();

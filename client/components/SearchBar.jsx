@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import styles from '../styles/searchBar.module.scss';
 import { useLazyQuery } from '@apollo/client';
 import client from '../api/apolloClient';
-import { GET_GAMES_BY_NAME } from '../api/queries';
+import { GET_THREE_GAMES_BY_NAME } from '../api/queries';
 import { useRouter } from 'next/router';
 
 export default function SearchBar(){
@@ -23,13 +23,15 @@ export default function SearchBar(){
         };
     }, [query]);
 
-    const [fetchGames, { loading, error, data }] = useLazyQuery(GET_GAMES_BY_NAME, {
+    const [fetchGames, { loading, error, data }] = useLazyQuery(GET_THREE_GAMES_BY_NAME, {
         client
     });
 
     useEffect(() => {
+      console.log(data);
+      
         if (debouncedQuery.length >= 3) {
-          fetchGames({ variables: { name: debouncedQuery, limit: 3 } });
+          fetchGames({ variables: { name: debouncedQuery } });
         }
     }, [debouncedQuery, fetchGames]);
 
@@ -67,8 +69,8 @@ export default function SearchBar(){
         <div className={styles.results}>
           {loading && <p>Loading...</p>}
           {error && <p style={{ color: "red" }}>Error: {error.message}</p>}
-          {data?.gamesByName.length > 0 ? (
-              data.gamesByName.map((game) => (
+          {data?.threeGamesByName.length > 0 ? (
+              data.threeGamesByName.map((game) => (
                 <a href='/game' className={styles.gameItem} key={game.id}>
                     <div className={styles.imgBox}>
                         <img src={`${ImageURL}${game.cover?.imageId}.jpg`} alt="cover" />

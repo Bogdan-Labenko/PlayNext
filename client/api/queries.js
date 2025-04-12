@@ -1,25 +1,30 @@
 import { gql } from "@apollo/client";
 
-export const GET_GAMES_BY_NAME = gql`
-  query GetGamesByName($name: String!, $limit: Int!) {
-    gamesByName(name: $name, limit: $limit) {
+export const GET_THREE_GAMES_BY_NAME = gql`
+  query ThreeGamesByName($name: String!) {
+    threeGamesByName(name: $name) {
       id
       name
       firstReleaseDate
       releaseDates{
         id
       }
-      platformsId
-      platforms{
-        id
-      }
       cover{
-        imageId
-      }
-      artworks{
-        id
         imageId
       }
     }
   }
 `;
+
+// 
+// 
+// platformsId
+// platforms{
+//   id
+// }
+// 
+// artworks{
+//   id
+//   imageId
+// }
+// }

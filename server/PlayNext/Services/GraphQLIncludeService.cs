@@ -50,7 +50,7 @@ public class GraphQLIncludeService
 
             if (isCollection || isClass)
             {
-                updatedQuery = updatedQuery.Include(propertyName);
+                updatedQuery = updatedQuery.Include(g => g.Cover);
             }
         }
 
