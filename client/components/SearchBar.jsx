@@ -4,14 +4,19 @@ import { useLazyQuery } from '@apollo/client';
 import client from '../api/apolloClient';
 import { GET_THREE_GAMES_BY_NAME } from '../api/queries';
 import { useRouter } from 'next/router';
+import { cover_small } from '../constants/urls';
 
 export default function SearchBar(){
     const [query, setQuery] = useState("");
     const [debouncedQuery, setDebouncedQuery] = useState(query);
     const [isFocused, setIsFocused] = useState(false);
-    const ImageURL = "https://images.igdb.com/igdb/image/upload/t_cover_small/"
+    const ImageURL = cover_small;
     const router = useRouter();
     const inputRef = useRef(null);
+
+    //identifing last request
+    const [currentRequestId, setCurrentRequestId] = useState(0);
+    const latestRequestId = useRef(0);
 
     useEffect(() => {
         const handler = setTimeout(() => {
@@ -24,23 +29,31 @@ export default function SearchBar(){
     }, [query]);
 
     const [fetchGames, { loading, error, data }] = useLazyQuery(GET_THREE_GAMES_BY_NAME, {
-        client
+      client,
+      fetchPolicy: 'network-only', // чтобы гарантированно не кешировалось
+      onCompleted: (newData) => {
+        if (latestRequestId.current === currentRequestId) {
+          setGames(newData.threeGamesByName); // твой state
+        }
+      },
     });
 
     useEffect(() => {
-      console.log(data);
-      
-        if (debouncedQuery.length >= 3) {
-          fetchGames({ variables: { name: debouncedQuery } });
-        }
-    }, [debouncedQuery, fetchGames]);
+      if (debouncedQuery.length >= 3) {
+        const newId = currentRequestId + 1;
+        setCurrentRequestId(newId);
+        latestRequestId.current = newId;
+    
+        fetchGames({ variables: { name: debouncedQuery } });
+      }
+    }, [debouncedQuery]);
 
     function handleKeyDown(e){
         if (e.key === "Enter") {
-            if (!query.trim()) return;
+          if (!query.trim()) return;
             
-            inputRef.current.blur();
-            router.push(`/search?query=${encodeURIComponent(query)}`);
+          inputRef.current.blur();
+          router.push(`/search?query=${encodeURIComponent(query)}`);
         }
     }
 
@@ -71,6 +84,7 @@ export default function SearchBar(){
           {error && <p style={{ color: "red" }}>Error: {error.message}</p>}
           {data?.threeGamesByName.length > 0 ? (
               data.threeGamesByName.map((game) => (
+                latestRequestId.current === currentRequestId &&
                 <a href='/game' className={styles.gameItem} key={game.id}>
                     <div className={styles.imgBox}>
                         <img src={`${ImageURL}${game.cover?.imageId}.jpg`} alt="cover" />

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useLazyQuery, useQuery } from "@apollo/client";
 import { GET_GAMES_BY_NAME } from "../api/queries";
 import client from '../api/apolloClient';
+import GameSearchCard from '../components/GameSearchCard'
 
 export default function SearchResults() {
     const router = useRouter();
@@ -27,10 +28,10 @@ export default function SearchResults() {
 
     useEffect(() => {
         if (data?.gamesByName) {
+            setGameCount(data.gamesByName.length);
             console.log(data.gamesByName);
-            
-            setGameCount(data.gamesByName.length); // Исправлена опечатка в length
         }
+
     }, [data]);
 
     return (
@@ -40,9 +41,17 @@ export default function SearchResults() {
             {data?.gamesByName && 
                 <div>
                     <h2>Games with similar name: {gamesCount}</h2>
-                    <hr style={{marginLeft: '100px', marginRight: 0}} />
+                    <hr style={{marginLeft: "85px"}}/>
                 </div>
+                
             }
+            <div style={{marginLeft: '80px'}}>
+                <div className={styles.list}>
+                    {data?.gamesByName.map(g => (
+                        <GameSearchCard key={g.id} game={g} />
+                    ))}
+                </div>
+            </div>
         </div>
     )
 } 

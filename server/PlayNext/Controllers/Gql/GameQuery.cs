@@ -33,34 +33,66 @@ public class GameQuery
         string name
     )
     {
-        string _name = name;
-        string slug;
-        _name = _name.ToLower().Trim();
-        slug = Regex.Replace(_name, @"\s+", "-"); // Заменить пробелы на '-'
-        //_name = Regex.Replace(_name, @"[^a-z0-9\-]", "");
-
-        var timer = new Stopwatch();
+        var (slug, _name) = Normalize(name);
         
         var maxRatings = context.Games
+            .AsNoTracking()
             .Max(g => g.AggregatedRatingCount);
         
-        var query = context.Games.
-            Include(g => g.AlternativeNames)
-            .Include(g => g.GameType)
+        var query = context.Games
+            .AsNoTracking()
             .Where(g =>
-                g.GameTypeId == 0 && g.AggregatedRatingCount > 0 &&
+                (g.GameTypeId == 0 || g.GameTypeId == 8 || g.GameTypeId == 8) && g.AggregatedRatingCount > 0 &&
                 (g.Slug.Contains(slug) || g.AlternativeNames.Any(a => a.Name.ToLower().Contains(_name)))
             )
             .OrderByDescending(g => g.Slug.Equals(_name))
             .ThenByDescending(g => g.Slug.StartsWith(_name))
             .ThenByDescending(g => g.AggregatedRating * (g.AggregatedRatingCount / (double)maxRatings))
+            //.ThenByDescending(g => g.FirstReleaseDate)
             .Take(3);
-        
-        timer.Start();
+
+
         query = _includeService.ApplyIncludes(query, resolverContext);
-        timer.Stop();
-        Console.WriteLine("Milliseconds: " + timer.Elapsed.TotalMilliseconds);
 
         return query;
+    }
+
+    public IQueryable<Game> GetGamesByName(
+        [Service] AppDbContext context,
+        IResolverContext resolverContext,
+        string name,
+        int limit = 24,
+        int page = 1
+    )
+    {
+        var (slug, _name) = Normalize(name);
+        int skip = (page - 1) * limit;
+        
+        var maxRatings = context.Games
+            .AsNoTracking()
+            .Max(g => g.AggregatedRatingCount);
+        
+        var query = context.Games
+            .AsNoTracking()
+            .Where(g =>
+                (g.GameTypeId == 0 || g.GameTypeId == 8 || g.GameTypeId == 8) &&
+                (g.Slug.Contains(slug) || g.AlternativeNames.Any(a => a.Name.ToLower().Contains(_name)))
+            )
+            .OrderByDescending(g => g.Slug.Equals(_name))
+            .ThenByDescending(g => g.Slug.StartsWith(_name))
+            .ThenByDescending(g => g.AggregatedRating * (g.AggregatedRatingCount / (double)maxRatings))
+            .Skip(skip)
+            .Take(limit);
+
+        return _includeService.ApplyIncludes(query, resolverContext);
+    }
+
+    private (string slug, string name) Normalize(string name)
+    {
+        string slug;
+        name = name.ToLower().Trim();
+        slug = Regex.Replace(name, @"\s+", "-"); // Заменить пробелы на '-'
+
+        return (slug, name);
     }
 }

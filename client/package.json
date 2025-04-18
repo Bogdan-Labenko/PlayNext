@@ -15,6 +15,7 @@
     "@apollo/client": "^3.13.5",
     "@lordicon/react": "^1.10.1",
     "@reduxjs/toolkit": "^2.6.1",
+    "color": "^5.0.0",
     "colorthief": "^2.6.0",
     "graphql": "^16.10.0",
     "lottie-react": "^2.4.1",
