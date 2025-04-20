@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using PlayNextServer.DTOs.Auth;
 using PlayNextServer.Models.Auth;
 using PlayNextServer.Services;
+using ErrorCodes = PlayNextServer.Models.Auth.ErrorCodes;
 
 namespace PlayNextServer.Controllers;
 
@@ -123,7 +124,6 @@ public class AuthController : ControllerBase
             }
         });
     }
-    [Authorize]
     [HttpPost("logout")]
     public IActionResult Logout()
     {

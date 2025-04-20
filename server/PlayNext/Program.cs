@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -6,13 +7,20 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using PlayNextServer;
+using PlayNextServer.Api;
+using PlayNextServer.Controllers.Gql;
 using PlayNextServer.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+	.AddJsonOptions(options =>
+	{
+		options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+		options.JsonSerializerOptions.WriteIndented = true;
+	});
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors(options =>
@@ -53,6 +61,14 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 builder.Services.AddScoped<AppDbContext>();
+builder.Services.AddScoped<IgdbApi>();
+builder.Services.AddScoped<GraphQLIncludeService>();
+builder.Services
+	.AddGraphQLServer()
+	.AddQueryType<GameQuery>()
+	.AddProjections()
+	.AddFiltering()
+	.AddSorting();
 
 var app = builder.Build();
 
@@ -72,6 +88,8 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers(); // Автоматически подключает контроллеры
+
+app.MapGraphQL();
 
 app.UseCors("AllowFrontend");
 

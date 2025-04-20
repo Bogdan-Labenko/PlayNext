@@ -8,7 +8,6 @@ export default function Home() {
       <div className={styles.start}>
         <img src='/logo_w.png' />
         <h2>Smart Game Recommendations<br/> for True Gamers</h2>
-        <BackgroundSpace></BackgroundSpace>
       </div>
     </div>);
 }

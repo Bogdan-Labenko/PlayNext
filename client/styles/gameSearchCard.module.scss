@@ -1,0 +1,91 @@
+.gameCard{
+    width: 544px;
+    background-color: black;
+    border-radius: 10px;
+    height: 300px;
+    .left{
+        height: 100%;
+        margin-left: 7px;
+        width: auto;
+        float: left;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        div{
+            margin-top: 3px;
+            width: 200px;
+            height: fit-content;
+            img{
+                width: 200px;
+                height: auto;
+                border-radius: 10px;
+            }
+        }
+    }
+    .right{
+        height: 100%;
+        float: left;
+        width: 337px;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-around;
+        h3{
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .title{
+            background-color: #343434;
+            border-radius: 15px;
+            margin-left: 7px;
+            margin-right: 7px;
+        }
+        .genres{
+            background-color: #343434;
+            border-radius: 15px;
+            margin-left: 7px;
+            margin-right: 7px;
+            div{
+                display: flex;
+                width: 100%;
+                flex-flow: row;
+                justify-content: space-around;
+                p{
+                    margin: 0;
+                    margin-top: 5px;
+                    margin-bottom: 15px;
+                }
+            }
+        }
+        .platforms{
+            background-color: #343434;
+            border-radius: 15px;
+            margin-left: 7px;
+            margin-right: 7px;
+            div{
+                display: flex;
+                width: 100%;
+                flex-flow: row;
+                justify-content: space-around;
+                margin-bottom: 10px;
+                span{
+                    img{
+                        height: 30px;
+                    }
+                }
+            }
+        }
+
+    }
+    .inactive {
+        filter: grayscale(100%);
+        opacity: 0.3;
+    }
+    .inactivePs {
+        filter: grayscale(100%) brightness(50%);
+        opacity: 0.3;
+    }
+    .inactiveA {
+        filter: grayscale(100%) brightness(150%);
+        opacity: 0.3;
+    }
+}
