@@ -53,7 +53,13 @@ export default function SearchBar(){
           if (!query.trim()) return;
             
           inputRef.current.blur();
-          router.push(`/search?query=${encodeURIComponent(query)}`);
+          router.push({
+            pathname: '/search',
+            query: {
+              query: query.trim(),
+              page: 1
+            }
+          });
         }
     }
 

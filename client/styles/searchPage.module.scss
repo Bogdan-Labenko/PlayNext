@@ -8,3 +8,22 @@
     gap: 15px;
     justify-content: space-around;
 }
+.nav{
+    button{
+        display: inline-block;
+        padding: 5px 15px 5px 15px;
+        border-radius: 10px;
+        border: none;
+        background-color: #4BB3FD;
+        transition: 0.2s background-color;
+        cursor: pointer;
+    }
+    button:hover{
+        background-color: #D9F0FF;
+    }
+    p{
+        display: inline-block;
+        padding: 5px 15px;
+        cursor: default;
+    }
+}

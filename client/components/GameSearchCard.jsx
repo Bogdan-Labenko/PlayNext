@@ -14,40 +14,7 @@ export default function GameSearchCard({ game }){
     const hasXbox = game.platforms?.some(p => platformMap.Xbox.includes(p.id));
     const hasPC = game.platforms?.some(p => platformMap.PC.includes(p.id));
     const hasPS = game.platforms?.some(p => platformMap.PlayStation.includes(p.id));
-    
-    const darken = (color, factor) => {
-        return color.map(c => Math.max(0, Math.floor(c * factor)))
-    }
-
-    // useEffect(() => {
-    //     const img = imgRef.current
-    //     if (!img) return
-      
-    //     img.crossOrigin = 'Anonymous'
-    //     img.onload = () => {
-    //       const colorThief = new ColorThief()
-    //       const result = colorThief.getColor(img) // [r, g, b]
-      
-    //       const main = Color.rgb(result)
-    //       const brightness = main.luminosity()  // 0 (чёрный) … 1 (белый)
-      
-    //       // на сколько мы миксуем: 0.3 = 30% чёрного/белого, 70% основного
-    //       const mixRatio = 0.12
-      
-    //       let alt
-    //       if (brightness < 0.05) {
-    //         // слишком тёмный → чуть осветлим
-    //         alt = main.mix(Color('white'), mixRatio)
-    //       } else {
-    //         // всё остальное → затемним
-    //         alt = main.mix(Color('black'), mixRatio)
-    //       }
-      
-    //       setMainColor(main.rgb().string())
-    //       setAltColor(alt.rgb().string())
-    //     }
-    //   }, [])
-
+    const hasConsole = game.platforms?.some(p => platformMap.PlayStation.includes(p.id));
     useEffect(() => {
         const img = imgRef.current
         if (!img) return
@@ -115,6 +82,9 @@ export default function GameSearchCard({ game }){
                     </span>
                     <span>
                         <img className={hasPS ? '' : styles.inactivePs} src='PlayStation.png' alt="PlayStation cover" />
+                    </span>
+                    <span>
+                        <img className={hasConsole ? styles.inactiveA : ''} src='game-controller.png' alt="Console cover" />
                     </span>
                 </div>
             </div>

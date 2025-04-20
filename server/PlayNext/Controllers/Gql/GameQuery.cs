@@ -75,7 +75,7 @@ public class GameQuery
         var query = context.Games
             .AsNoTracking()
             .Where(g =>
-                (g.GameTypeId == 0 || g.GameTypeId == 8 || g.GameTypeId == 8) &&
+                (g.GameTypeId == 0 || g.GameTypeId == 8 || g.GameTypeId == 9 || g.GameTypeId == 11) &&
                 (g.Slug.Contains(slug) || g.AlternativeNames.Any(a => a.Name.ToLower().Contains(_name)))
             )
             .OrderByDescending(g => g.Slug.Equals(_name))

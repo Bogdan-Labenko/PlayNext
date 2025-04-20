@@ -13,8 +13,8 @@ export const GET_THREE_GAMES_BY_NAME = gql`
 `;
 
 export const GET_GAMES_BY_NAME = gql`
-  query gamesByName($name: String!) {
-    gamesByName(name: $name) {
+  query gamesByName($name: String!, $limit: Int, $page: Int) {
+    gamesByName(name: $name, limit: $limit, page: $page) {
       id
       name
       firstReleaseDate
