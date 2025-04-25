@@ -1,16 +1,14 @@
-.start{
+.start {
+    z-index: 10;
+    position: relative;
     height: 190vh;
-    // h1{
-    //     padding-top: 100px;
-    //     font-size: 60px;
-    //     margin: 0;
-    // }
-    img{
-        width: 40%;
-        margin-top: 10%;
-        inset: 0;
+  
+    img {
+      width: 40%;
+      margin-top: 10%;
     }
-    h2{
-        font-size: 40px;
+  
+    h2 {
+      font-size: 40px;
     }
-}
+  }

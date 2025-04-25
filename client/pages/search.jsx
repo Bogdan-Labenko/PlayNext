@@ -44,7 +44,7 @@ export default function SearchResults() {
     }, [data]);
 
     return (
-        <div>
+        <div className={styles.main}>
             <div style={{marginLeft: '80px'}}>
                 {loading && <Loader/>}
                 {error && <h3 style={{marginLeft: '-80px'}}>{error.message}</h3>}
