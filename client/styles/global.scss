@@ -13,7 +13,9 @@ $primary-contrast: #66A7B5;
 }
 
 html{
-    background: $primary-dark;
+    background: url("/background1.svg");
+    background-repeat: repeat;
+    background-size: 200px 200px;
 }
 *{
     font-family: 'Exo-2-Bold';
