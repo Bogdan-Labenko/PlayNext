@@ -2,6 +2,7 @@ import { useState } from 'react'
 import styles from '../styles/navbar.module.scss'
 import SignUpLogInModal from './SignUpLogInModal.jsx'
 import { useSelector } from 'react-redux';
+import Link from 'next/link';
 
 export default function NavBar(){
     const [isHovered, setIsHovered] = useState(false);
@@ -12,8 +13,8 @@ export default function NavBar(){
     return <>
         <header
             className={styles.navbar}
-            onMouseEnter={() => setIsHovered(true)}  // Когда навели на navbar
-            onMouseLeave={() => setIsHovered(false)} // Когда убрали курсор
+            onMouseEnter={() => setIsHovered(true)} 
+            onMouseLeave={() => setIsHovered(false)}
         >
             <div className={styles.div1}>
                 <div>
@@ -21,23 +22,21 @@ export default function NavBar(){
                 </div>
             </div>
             <div className={styles.div2}>
-                <a href="/">
+                <Link href="/" passHref>
                     <div className={styles.iconWrapper}>
-                        {/* "Стандартная" иконка */}
                         <img
                             className={`${styles.icon} ${isHovered ? styles.hidden : ''}`}
                             src="/home_thin.png"
                             alt="Home"
                         />
-                        {/* Иконка при наведении */}
                         <img
                             className={`${styles.icon} ${isHovered ? '' : styles.hidden}`}
                             src="/home.png"
                             alt="Home"
                         />
                     </div>
-                </a>
-                <a href="/recommendations">
+                </Link>
+                <Link href="/recommendations" passHref>
                     <div className={styles.iconWrapper}>
                         <img
                             className={`${styles.icon} ${isHovered ? styles.hidden : ''}`}
@@ -50,37 +49,34 @@ export default function NavBar(){
                             alt="Recommendations"
                         />
                     </div>
-                </a>
+                </Link>
             </div>
             <div className={styles.div3}>
                 {
-                user ? <div>
-                        <a 
-                            className={styles.avatar} 
-                            href="/dashboard"
-                        >
+                user ? (
+                    <Link href="/dashboard" passHref>
+                        <div className={styles.avatar}>
                             <img src="avatar.jpg" alt="Avatar" />
-                        </a>
+                        </div>
+                    </Link>
+                ) : (
+                    <div className={styles.logIn} onClick={() => setIsModal(!isModal)}>
+                        <div className={styles.iconWrapper}>
+                            <img
+                                className={`${styles.icon} ${isHovered ? styles.hidden : ''}`}
+                                src="/enter_thin.png"
+                                alt="Log in"
+                            />
+                            <img
+                                className={`${styles.icon} ${isHovered ? '' : styles.hidden}`}
+                                src="/enter.png"
+                                alt="Log in"
+                            />
+                        </div>
                     </div>
-                : <div className={styles.logIn} onClick={() => {
-                        setIsModal(!isModal)
-                    }}>
-                    <div className={styles.iconWrapper}>
-                        <img
-                            className={`${styles.icon} ${isHovered ? styles.hidden : ''}`}
-                            src="/enter_thin.png"
-                            alt="Log in"
-                        />
-                        <img
-                            className={`${styles.icon} ${isHovered ? '' : styles.hidden}`}
-                            src="/enter.png"
-                            alt="Log in"
-                        />
-                    </div>
-                </div>}
+                )}
             </div>
-            
         </header>   
-        {isModal ? <SignUpLogInModal setIsModal={setIsModal} /> : ""}
+        {isModal ? <SignUpLogInModal setIsModal={setIsModal} /> : null}
     </>
 }

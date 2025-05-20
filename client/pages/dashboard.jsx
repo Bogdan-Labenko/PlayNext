@@ -1,8 +1,9 @@
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { logout } from "../slices/userSlice"; // Импортируем action logout
+import withAuth from "../utils/withAuth";
 
-export default function Dashboard() {
+function Dashboard() {
     const router = useRouter();
     const dispatch = useDispatch();
 
@@ -30,3 +31,5 @@ export default function Dashboard() {
         </div>
     );
 }
+
+export default withAuth(Dashboard);

@@ -57,6 +57,7 @@ export default function SignUpLogInModal({ setIsModal }){
         if (response.ok) {
             const data = await response.json();
             dispatch(setUser({ user: data.user }));
+            setIsModal(false)
             router.push("/dashboard");
         } 
         else {

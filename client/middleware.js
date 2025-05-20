@@ -1,6 +1,5 @@
 // middleware.js
 import { NextResponse } from 'next/server';
-import { NextRequest } from 'next/server';
 
 // Проверяем авторизацию пользователя
 export function middleware(request) {
@@ -20,8 +19,3 @@ export function middleware(request) {
 
   return NextResponse.next();
 }
-
-// Указываем, для каких путей должен работать middleware
-export const config = {
-  matcher: ['/dashboard'], // Путь(и), для которых требуется защита
-};

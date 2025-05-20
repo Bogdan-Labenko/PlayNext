@@ -6,11 +6,12 @@ $primary-very-light: #D9F0FF;  // Ну прям светлый оттенок
 $primary-contrast: #4BB3FD;
 
 .navbar {
-    background: linear-gradient(
-        to right,
-        $primary-medium,
-        $primary
-    );
+    // background: linear-gradient(
+    //     to right,
+    //     $primary-medium,
+    //     $primary
+    // );
+    background-color: rgba(26, 45, 127, 0.7);
     flex: 1;
     color: $primary-very-light;
     width: 80px;

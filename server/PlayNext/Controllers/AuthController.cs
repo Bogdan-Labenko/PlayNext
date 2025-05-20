@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -137,5 +138,15 @@ public class AuthController : ControllerBase
 
         Response.Cookies.Append("token", "", cookieOptions);
         return Ok(new { message = "Logged out" });
+    }
+
+    [Authorize]
+    [HttpGet("validate")]
+    public IActionResult Validate()
+    {
+        return Ok(new {
+            Username = User.Identity?.Name,
+            Email = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value
+        });
     }
 }

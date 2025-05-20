@@ -45,7 +45,7 @@ public class JwtTokenService : IJwtTokenService
             issuer: _issuer,
             audience: _audience,
             claims: claims,
-            expires: DateTime.Now.AddHours(_expirationMinutes),
+            expires: DateTime.UtcNow.AddMinutes(_expirationMinutes),
             signingCredentials: credentials
         );
 
