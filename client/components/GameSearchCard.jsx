@@ -4,55 +4,63 @@ import { cover_big, no_cover_big,  } from '../constants/urls.js';
 import styles from '../styles/gameSearchCard.module.scss';
 import { platformMap } from '../constants/platformMap';
 import Color from 'color';
+import { useRouter } from 'next/router';
 
 
 export default function GameSearchCard({ game }){
     const [mainColor, setMainColor] = useState();
     const [altColor, setAltColor] = useState();
     const imgRef = useRef(null);
+    const router = useRouter();
 
     const hasXbox = game.platforms?.some(p => platformMap.Xbox.includes(p.id));
     const hasPC = game.platforms?.some(p => platformMap.PC.includes(p.id));
     const hasPS = game.platforms?.some(p => platformMap.PlayStation.includes(p.id));
     const hasConsole = game.platforms?.some(p => platformMap.PlayStation.includes(p.id));
-    useEffect(() => {
-        const img = imgRef.current
-        if (!img) return
+    // Получение основного цвета из обложки и смена цветов карточки
+    // useEffect(() => {
+    //     const img = imgRef.current
+    //     if (!img) return
       
-        img.crossOrigin = 'Anonymous'
-        img.onload = () => {
-          const colorThief = new ColorThief()
-          const result = colorThief.getColor(img) // [r, g, b]
+    //     img.crossOrigin = 'Anonymous'
+    //     img.onload = () => {
+    //       const colorThief = new ColorThief()
+    //       const result = colorThief.getColor(img) // [r, g, b]
       
-          // 1) Получаем основной цвет
-          let main = Color.rgb(result)
-          const mainLum = main.luminosity()  // 0 (чёрный) … 1 (белый)
+    //       // 1) Получаем основной цвет
+    //       let main = Color.rgb(result)
+    //       const mainLum = main.luminosity()  // 0 (чёрный) … 1 (белый)
       
-          // 2) Если основной цвет слишком яркий, слегка его затемняем:
-          const brightThreshold = 0.6      // порог «слишком ярко»
-          const brightMixRatio = 0.3     // насколько миксовать с чёрным
-          if (mainLum > brightThreshold) {
-            main = main.mix(Color('black'), brightMixRatio)
-          }
+    //       // 2) Если основной цвет слишком яркий, слегка его затемняем:
+    //       const brightThreshold = 0.6      // порог «слишком ярко»
+    //       const brightMixRatio = 0.3     // насколько миксовать с чёрным
+    //       if (mainLum > brightThreshold) {
+    //         main = main.mix(Color('black'), brightMixRatio)
+    //       }
       
-          // 3) Высчитываем фон для текста (altColor):
-          const darkThreshold = 0.05
-          const mixRatio = 0.25          // для alt всегда 30% «черного/белого» компонента
-          let alt
-          if (main.luminosity() < darkThreshold) {
-            // слишком тёмный → осветляем
-            alt = main.mix(Color('white'), mixRatio - 0.15)
-          } else {
-            // обычное затемнение
-            alt = main.mix(Color('black'), mixRatio )
-          }
+    //       // 3) Высчитываем фон для текста (altColor):
+    //       const darkThreshold = 0.05
+    //       const mixRatio = 0.25          // для alt всегда 30% «черного/белого» компонента
+    //       let alt
+    //       if (main.luminosity() < darkThreshold) {
+    //         // слишком тёмный → осветляем
+    //         alt = main.mix(Color('white'), mixRatio - 0.15)
+    //       } else {
+    //         // обычное затемнение
+    //         alt = main.mix(Color('black'), mixRatio )
+    //       }
       
-          setMainColor(main.rgb().string())  // например, "rgb(220, 180, 50)" или чуть темнее
-          setAltColor(alt.rgb().string())    // тёмный/светлый фон для текста
-        }
-      }, [])
+    //       //setMainColor(main.rgb().string())  // например, "rgb(220, 180, 50)" или чуть темнее
+    //       //setAltColor(alt.rgb().string())    // тёмный/светлый фон для текста
+    //     }
+    //   }, [])
 
-    return <div style={{backgroundColor: mainColor}} className={styles.gameCard}>
+    return <div 
+    onClick={() => {
+        router.push(`/game?id=${game.id}`)
+    }}
+    style={{backgroundColor: mainColor}} 
+    className={styles.gameCard}>
         <div className={styles.left}>
             <div>
                 <img ref={imgRef} src={game.cover?.imageId ? `${cover_big}${game.cover?.imageId}.jpg` : no_cover_big} alt="cover" />

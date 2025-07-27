@@ -1,8 +1,9 @@
 .gameCard{
     width: 544px;
-    background-color: black;
+    background-color: #1A2C80;
     border-radius: 10px;
     height: 300px;
+    cursor: pointer;
     .left{
         height: 100%;
         margin-left: 7px;
@@ -34,13 +35,13 @@
             margin-bottom: 10px;
         }
         .title{
-            background-color: #343434;
+            background-color: #081448;
             border-radius: 15px;
             margin-left: 7px;
             margin-right: 7px;
         }
         .genres{
-            background-color: #343434;
+            background-color: #081448;
             border-radius: 15px;
             margin-left: 7px;
             margin-right: 7px;
@@ -57,7 +58,7 @@
             }
         }
         .platforms{
-            background-color: #343434;
+            background-color: #081448;
             border-radius: 15px;
             margin-left: 7px;
             margin-right: 7px;
@@ -88,4 +89,7 @@
         filter: grayscale(100%) brightness(150%);
         opacity: 0.3;
     }
+}
+.gameCard:hover{
+    transform: scale(1.05);
 }

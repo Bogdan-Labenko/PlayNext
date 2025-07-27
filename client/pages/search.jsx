@@ -21,7 +21,6 @@ export default function SearchResults() {
         if (router.isReady) {
             const searchQuery = router.query.query || '';
             const currentPage = parseInt(router.query.page) || 1;
-            console.log(router.query);
             
             setQuery(router.query.query);
             setPage(currentPage);
